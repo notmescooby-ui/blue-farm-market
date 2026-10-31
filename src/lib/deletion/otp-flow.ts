@@ -1,4 +1,5 @@
 import type { VerifiedIdentifier } from "@/lib/deletion/verification";
+import { OTP_INVALID_MESSAGE } from "@/lib/deletion/verification";
 import { supabase } from "@/lib/supabase/client";
 
 /**
