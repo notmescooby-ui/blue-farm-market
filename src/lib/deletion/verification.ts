@@ -34,9 +34,20 @@ export function parseIdentifier(raw: string): VerifiedIdentifier | null {
 
 /** The deletion request form, as typed by the user (before identifier parsing). */
 export const deletionRequestSchema = z.object({
-  identifier: z.string().trim().min(1, "Enter the email or phone number registered to your account.").max(255),
-  accountType: z.enum(["farmer", "buyer"], { message: "Choose whether this is a Farmer or Buyer account." }),
-  reason: z.string().trim().max(500, "Keep the reason under 500 characters.").optional().default(""),
+  identifier: z
+    .string()
+    .trim()
+    .min(1, "Enter the email or phone number registered to your account.")
+    .max(255),
+  accountType: z.enum(["farmer", "buyer"], {
+    message: "Choose whether this is a Farmer or Buyer account.",
+  }),
+  reason: z
+    .string()
+    .trim()
+    .max(500, "Keep the reason under 500 characters.")
+    .optional()
+    .default(""),
   confirmed: z.boolean().refine((v) => v === true, {
     message: "Please confirm you understand this request is for permanent deletion.",
   }),

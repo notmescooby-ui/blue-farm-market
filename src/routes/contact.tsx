@@ -48,7 +48,9 @@ function ContactPage() {
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary">
                 <Mail className="h-5 w-5 text-primary" />
               </span>
-              <h2 className="mt-4 font-display text-lg font-semibold text-foreground">Email support</h2>
+              <h2 className="mt-4 font-display text-lg font-semibold text-foreground">
+                Email support
+              </h2>
               <p className="mt-1 text-sm text-muted-foreground">bluefarm1572@gmail.com</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 The fastest way to reach us for account deletion problems.
@@ -75,10 +77,10 @@ function ContactPage() {
               <div className="text-sm leading-relaxed">
                 <p className="font-semibold">Concerned about a deletion request you didn't make?</p>
                 <p className="mt-1 text-deep-foreground/80">
-                  Requests can only be submitted after verifying a code sent to the registered
-                  email or phone number. If you received a code you didn't ask for, or believe
-                  someone is trying to delete your account, email us immediately and change your
-                  account password in the app.
+                  Requests can only be submitted after verifying a code sent to the registered email
+                  or phone number. If you received a code you didn't ask for, or believe someone is
+                  trying to delete your account, email us immediately and change your account
+                  password in the app.
                 </p>
               </div>
             </div>
@@ -86,9 +88,14 @@ function ContactPage() {
 
           <p className="mt-10 text-center text-sm text-muted-foreground">
             You can also review the{" "}
-            <Link to="/privacy" className="font-semibold text-primary underline">Privacy Policy</Link>{" "}
+            <Link to="/privacy" className="font-semibold text-primary underline">
+              Privacy Policy
+            </Link>{" "}
             or{" "}
-            <Link to="/" className="font-semibold text-primary underline">submit a deletion request</Link>.
+            <Link to="/" className="font-semibold text-primary underline">
+              submit a deletion request
+            </Link>
+            .
           </p>
         </section>
       </main>

@@ -121,12 +121,12 @@ function Index() {
                 permanent deletion of your account and associated personal data here.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href="#request-form"
+                <Link
+                  to="/account-deletion"
                   className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                 >
                   Start deletion request
-                </a>
+                </Link>
                 <Link
                   to="/track"
                   className="inline-flex items-center justify-center rounded-full border border-primary/25 bg-card px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-secondary"
@@ -141,9 +141,15 @@ function Index() {
               </h2>
               <ol className="mt-4 space-y-4">
                 {[
-                  { icon: ClipboardList, text: "Submit the request form with your registered email or phone number." },
+                  {
+                    icon: ClipboardList,
+                    text: "Submit the request form with your registered email or phone number.",
+                  },
                   { icon: UserCheck, text: "Verify ownership with the 6-digit code sent to you." },
-                  { icon: Landmark, text: "BlueFarm reviews active orders and applicable retention rules." },
+                  {
+                    icon: Landmark,
+                    text: "BlueFarm reviews active orders and applicable retention rules.",
+                  },
                   { icon: Trash2, text: "Eligible data is deleted and your account is removed." },
                 ].map((s, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -156,7 +162,12 @@ function Index() {
               </ol>
             </div>
           </div>
-          <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="relative block h-8 w-full text-background" aria-hidden="true">
+          <svg
+            viewBox="0 0 1440 60"
+            preserveAspectRatio="none"
+            className="relative block h-8 w-full text-background"
+            aria-hidden="true"
+          >
             <path
               d="M0 30 C 120 10 240 50 360 30 C 480 10 600 50 720 30 C 840 10 960 50 1080 30 C 1200 10 1320 50 1440 30 L 1440 60 L 0 60 Z"
               fill="currentColor"
@@ -174,11 +185,16 @@ function Index() {
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {BEFORE_DELETE.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+              <div
+                key={item.title}
+                className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+              >
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary">
                   <item.icon className="h-5 w-5 text-primary" />
                 </span>
-                <h3 className="mt-4 font-display text-lg font-semibold text-foreground">{item.title}</h3>
+                <h3 className="mt-4 font-display text-lg font-semibold text-foreground">
+                  {item.title}
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
               </div>
             ))}
@@ -192,7 +208,9 @@ function Index() {
                   What is deleted, what may be retained, and why.
                 </p>
               </div>
-              <span aria-hidden="true" className="text-2xl">&rarr;</span>
+              <span aria-hidden="true" className="text-2xl">
+                &rarr;
+              </span>
             </a>
           </div>
         </section>
@@ -228,7 +246,9 @@ function Index() {
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary">
                   <Trash2 className="h-5 w-5 text-primary" />
                 </span>
-                <h3 className="font-display text-lg font-semibold text-primary">Deleted or anonymised</h3>
+                <h3 className="font-display text-lg font-semibold text-primary">
+                  Deleted or anonymised
+                </h3>
               </div>
               <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-foreground/85">
                 <li>- Your login credentials and account profile</li>

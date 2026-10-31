@@ -16,24 +16,45 @@ export function Footer() {
         </div>
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider text-deep-foreground/60">
-            This portal
+            Account & Support
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-aqua">Account deletion request</Link></li>
-            <li><Link to="/track" className="hover:text-aqua">Track my request</Link></li>
-            <li><Link to="/privacy" className="hover:text-aqua">Privacy Policy</Link></li>
+            <li>
+              <Link to="/account-deletion" className="hover:text-aqua">
+                Delete Account
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy" className="hover:text-aqua">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/track" className="hover:text-aqua">
+                Track request
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-aqua">
+                Contact Support
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
           <h3 className="text-sm font-semibold uppercase tracking-wider text-deep-foreground/60">
-            Support
+            Contact Us
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><Link to="/contact" className="hover:text-aqua">Contact Support</Link></li>
             <li>
               <a href="mailto:bluefarm1572@gmail.com" className="hover:text-aqua">
                 bluefarm1572@gmail.com
               </a>
+            </li>
+            <li>
+              <span className="text-xs text-deep-foreground/60">
+                Support available for Aquaculture Farmers &amp; Buyers
+              </span>
             </li>
           </ul>
         </div>
@@ -41,7 +62,13 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-5 text-xs text-deep-foreground/60 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>&copy; {new Date().getFullYear()} BlueFarm. All rights reserved.</p>
-          <p>Use of this portal is subject to the BlueFarm{" "}<Link to="/privacy" className="underline hover:text-aqua">Privacy Policy</Link>.</p>
+          <p>
+            Use of this portal is subject to the BlueFarm{" "}
+            <Link to="/privacy" className="underline hover:text-aqua">
+              Privacy Policy
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { label: "Home", to: "/" },
+  { label: "Delete Account", to: "/account-deletion" },
   { label: "Track request", to: "/track" },
   { label: "Privacy Policy", to: "/privacy" },
   { label: "Contact Support", to: "/contact" },
@@ -56,7 +57,14 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card md:hidden"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 text-primary" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5 text-primary"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          >
             {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
           </svg>
         </button>

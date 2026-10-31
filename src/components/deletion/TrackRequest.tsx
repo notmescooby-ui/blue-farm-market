@@ -72,10 +72,23 @@ export function TrackRequest() {
   }, []);
 
   useEffect(() => {
+    const localRequests: DeletionRequestRow[] = (() => {
+      try {
+        return JSON.parse(localStorage.getItem("bf_tracked_requests") || "[]");
+      } catch {
+        return [];
+      }
+    })();
+
     if (!session) {
-      setRequests(null);
+      if (localRequests.length > 0) {
+        setRequests(localRequests);
+      } else {
+        setRequests(null);
+      }
       return;
     }
+
     setLoadingRequests(true);
     supabase
       .from("account_deletion_requests")
@@ -83,7 +96,14 @@ export function TrackRequest() {
       .order("requested_at", { ascending: false })
       .then(({ data, error }) => {
         if (error) console.error("track request load error:", error.code);
-        setRequests(data ?? []);
+        const combined = [...(data ?? []), ...localRequests];
+        const seen = new Set<string>();
+        const unique = combined.filter((r) => {
+          if (seen.has(r.reference_code)) return false;
+          seen.add(r.reference_code);
+          return true;
+        });
+        setRequests(unique);
         setLoadingRequests(false);
       });
   }, [session]);
@@ -127,8 +147,13 @@ export function TrackRequest() {
   if (!session) {
     if (!codeSent || !contact) {
       return (
-        <form onSubmit={handleSendCode} className="mx-auto max-w-md rounded-3xl border border-border bg-card p-8 shadow-sm">
-          <h3 className="font-display text-xl font-bold text-primary">Sign in to track your request</h3>
+        <form
+          onSubmit={handleSendCode}
+          className="mx-auto max-w-md rounded-3xl border border-border bg-card p-8 shadow-sm"
+        >
+          <h3 className="font-display text-xl font-bold text-primary">
+            Sign in to track your request
+          </h3>
           <p className="mt-2 text-sm text-muted-foreground">
             Enter the email or phone number registered to your BlueFarm account. We'll send a
             one-time verification code to confirm it's you.
@@ -143,7 +168,9 @@ export function TrackRequest() {
             />
           </div>
           {verifyError && (
-            <p role="alert" className="mt-3 text-sm font-medium text-destructive">{verifyError}</p>
+            <p role="alert" className="mt-3 text-sm font-medium text-destructive">
+              {verifyError}
+            </p>
           )}
           <Button type="submit" className="mt-5 w-full" size="lg" disabled={sending}>
             {sending ? "Sending code..." : "Send verification code"}
@@ -152,7 +179,10 @@ export function TrackRequest() {
       );
     }
     return (
-      <form onSubmit={handleVerify} className="mx-auto max-w-md rounded-3xl border border-border bg-card p-8 text-center shadow-sm">
+      <form
+        onSubmit={handleVerify}
+        className="mx-auto max-w-md rounded-3xl border border-border bg-card p-8 text-center shadow-sm"
+      >
         <h3 className="font-display text-xl font-bold text-primary">Enter your code</h3>
         <p className="mt-2 text-sm text-muted-foreground">{OTP_SENT_MESSAGE}</p>
         <div className="mt-6 flex justify-center">
@@ -174,9 +204,16 @@ export function TrackRequest() {
           </InputOTP>
         </div>
         {verifyError && (
-          <p role="alert" className="mt-4 text-sm font-medium text-destructive">{verifyError}</p>
+          <p role="alert" className="mt-4 text-sm font-medium text-destructive">
+            {verifyError}
+          </p>
         )}
-        <Button type="submit" className="mt-6 w-full" size="lg" disabled={verifying || code.length !== 6}>
+        <Button
+          type="submit"
+          className="mt-6 w-full"
+          size="lg"
+          disabled={verifying || code.length !== 6}
+        >
           {verifying ? "Checking..." : "Verify"}
         </Button>
         <Button
@@ -220,7 +257,11 @@ export function TrackRequest() {
       {!loadingRequests && requests && requests.length === 0 && (
         <div className="mt-6 rounded-3xl border border-border bg-card p-8 text-center text-sm text-muted-foreground">
           There is no deletion request on this account. If you'd like to delete your account, you
-          can submit a request from the <a href="/" className="font-medium text-primary underline">home page</a>.
+          can submit a request from the{" "}
+          <a href="/" className="font-medium text-primary underline">
+            home page
+          </a>
+          .
         </div>
       )}
       <div className="mt-6 grid gap-4">
@@ -233,7 +274,12 @@ export function TrackRequest() {
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   {req.account_type.charAt(0).toUpperCase() + req.account_type.slice(1)} account ·
-                  requested {new Date(req.requested_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}
+                  requested{" "}
+                  {new Date(req.requested_at).toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
                   {req.completed_at &&
                     ` · completed ${new Date(req.completed_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}`}
                 </p>
