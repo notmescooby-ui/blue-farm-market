@@ -81,7 +81,7 @@ export function DeletionRequestForm() {
         }
       }
       if (validation.success && !identifierVerified) {
-        errors.identifier =
+        errors["identifier"] =
           "Enter the email address or phone number registered to your BlueFarm account.";
       }
       setFieldErrors(errors);
@@ -309,10 +309,10 @@ export function DeletionRequestForm() {
             placeholder="you@example.com or 98765 43210"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
-            aria-invalid={Boolean(fieldErrors.identifier)}
+            aria-invalid={Boolean(fieldErrors["identifier"])}
           />
-          {fieldErrors.identifier && (
-            <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors.identifier}</p>
+          {fieldErrors["identifier"] && (
+            <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors["identifier"]}</p>
           )}
         </div>
 
@@ -333,8 +333,8 @@ export function DeletionRequestForm() {
               </Label>
             ))}
           </RadioGroup>
-          {fieldErrors.accountType && (
-            <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors.accountType}</p>
+          {fieldErrors["accountType"] && (
+            <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors["accountType"]}</p>
           )}
         </div>
 
@@ -349,8 +349,8 @@ export function DeletionRequestForm() {
             onChange={(e) => setReason(e.target.value)}
           />
           <p className="text-xs text-muted-foreground">{reason.length}/500 characters</p>
-          {fieldErrors.reason && (
-            <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors.reason}</p>
+          {fieldErrors["reason"] && (
+            <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors["reason"]}</p>
           )}
         </div>
 
@@ -361,8 +361,8 @@ export function DeletionRequestForm() {
             associated data.
           </span>
         </label>
-        {fieldErrors.confirmed && (
-          <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors.confirmed}</p>
+        {fieldErrors["confirmed"] && (
+          <p role="alert" className="text-sm font-medium text-destructive">{fieldErrors["confirmed"]}</p>
         )}
 
         <Button type="submit" size="lg" disabled={sending}>
